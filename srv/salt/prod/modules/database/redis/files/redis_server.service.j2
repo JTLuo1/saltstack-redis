@@ -1,0 +1,14 @@
+
+
+[Unit]
+Description=Redis data structure server
+Documentation=https://redis.io/documentation
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart={{ pillar['redis_install_dir'] }}/bin/redis-server {{ pillar['redis_install_dir'] }}/conf/redis.conf --supervised systemd
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
