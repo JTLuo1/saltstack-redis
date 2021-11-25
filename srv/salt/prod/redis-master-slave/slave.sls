@@ -12,5 +12,7 @@ redis_server:
   service.running:
     - restart: true
 
-{{ pillar['redis_install_dir'] }}/bin/redis-cli replicaof {{ pillar['redis_master_ip'] }} {{ pillar['redis_port'] }}:
-  cmd.run
+slave-replication:
+  cmd.run:
+    - name:  {{ pillar['redis_install_dir']  }}/bin/redis-cli -p {{ pillar['redis_port'] }} -a {{ pillar['redis_pass']  }} INFO replication  
+
